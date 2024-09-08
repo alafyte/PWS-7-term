@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab01</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Lab01</h1>
+        <button onclick="getResult()">GET Result</button>
+        <button onclick="postResult()">POST Result</button>
+        <button onclick="putStack()">PUT Stack</button>
+        <button onclick="deleteStack()">DELETE Stack</button>
+        <div id="result"></div>
+        <div id="error" style="color: red;"></div>
+    </div>
+    <script>
+        const apiUrl = 'http://localhost:40001/test.RNA';
+
+        async function getResult() {
+            try {
+                const response = await fetch(apiUrl, { method: 'GET' });
+                const data = await response.json();
+                document.getElementById('result').innerText = `Result: ${data.result}`;
+            } catch (error) {
+                document.getElementById('error').innerText = `Error: ${error.message}`;
+            }
+        }
+
+        async function postResult() {
+            const resultValue = prompt("Enter result value:");
+            try {
+                const apiWithParams = apiUrl + `?result=${resultValue}`;
+                const response = await fetch(apiWithParams, {
+                    method: 'POST'
+                });
+                if (!response.ok) {
+                    const error = await response.text();
+                    throw new Error(error);
+                }
+                alert('Result posted successfully');
+            } catch (error) {
+                document.getElementById('error').innerText = `Error: ${error.message}`;
+            }
+        }
+
+        async function putStack() {
+            const addValue = prompt("Enter value to add to stack:");
+            try {
+                const apiWithParams = apiUrl + `?add=${addValue}`;
+                const response = await fetch(apiWithParams, {
+                    method: 'PUT',
+                    credentials: 'include'
+                });
+                if (!response.ok) {
+                    const error = await response.text();
+                    throw new Error(error);
+                }
+                const error = await response.text();
+                alert('Value added to stack successfully:', error);
+            } catch (error) {
+                document.getElementById('error').innerText = `Error: ${error.message}`;
+            }
+        }
+
+        async function deleteStack() {
+            try {
+                const response = await fetch(apiUrl, { method: 'DELETE', credentials: 'include' });
+                if (!response.ok) {
+                    const error = await response.text();
+                    throw new Error(error);
+                }
+                alert('Stack element deleted successfully');
+            } catch (error) {
+                document.getElementById('error').innerText = `Error: ${error.message}`;
+            }
+        }
+    </script>
+</body>
+
+</html>
