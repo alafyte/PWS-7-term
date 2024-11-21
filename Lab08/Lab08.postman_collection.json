@@ -1,0 +1,39 @@
+{
+	"info": {
+		"_postman_id": "810b2857-74be-48fe-9c30-c5920c6dfdd0",
+		"name": "Lab08",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "35961558"
+	},
+	"item": [
+		{
+			"name": "JSON-RPC Package",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n\t\t\"id\": 1,\n        \"jsonrpc\": \"2.0\",\n        \"params\": {\n            \"k\": \"x\",\n            \"x\": 12\n        },\n        \"method\": \"SetM\"\n    },\n      {\n        \"id\": 2,\n        \"jsonrpc\": \"2.0\",\n        \"params\": {\n            \"k\": \"x\",\n            \"x\": 2\n        },\n        \"method\": \"MulM\"\n    },\n    {\n        \"id\": 3,\n        \"jsonrpc\": \"2.0\",\n        \"params\": {\n            \"k\": \"x\",\n            \"x\": 20\n        },\n        \"method\": \"AddM\"\n    },\n    {\n        \"id\": 4,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"ErrorExit\"\n    },\n    {\n        \"id\": 5,\n        \"jsonrpc\": \"2.0\",\n        \"params\": {\n            \"k\": \"x\"\n        },\n        \"method\": \"GetM\"\n    }\n]"
+				},
+				"url": {
+					"raw": "http://localhost:50457/api/jr",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "50457",
+					"path": [
+						"api",
+						"jr"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
