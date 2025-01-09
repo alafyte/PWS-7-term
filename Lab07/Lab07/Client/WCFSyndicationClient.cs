@@ -27,7 +27,7 @@ namespace Client
             richTextBox1.Text = "";
 
                 XmlDocument xmlDoc = new XmlDocument();
-                xmlDoc.Load(@"http://localhost:8733/SyndicationService/feed/students" + "?format=atom");
+                xmlDoc.Load(@"http://localhost:8733/SyndicationService/feed/students" + "?format=xml&type=atom");
                 XmlElement root = xmlDoc.DocumentElement;
 
                 XmlNamespaceManager nsmgr = new XmlNamespaceManager(xmlDoc.NameTable);
@@ -59,7 +59,7 @@ namespace Client
 
                 XmlDocument rssXmlDoc = new XmlDocument();
 
-                rssXmlDoc.Load(@"http://localhost:8733/SyndicationService/feed/students" + "?format=rss");
+                rssXmlDoc.Load(@"http://localhost:8733/SyndicationService/feed/students" + "?format=xml&type=rss");
 
                 XmlNodeList rssNodes = rssXmlDoc.SelectNodes("rss/channel/item");
 
